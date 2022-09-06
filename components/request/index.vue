@@ -7,10 +7,10 @@
     >
       <v-row align="center">
         <v-col class="grow">
-          Nunc nonummy metus. Nunc interdum lacus sit amet orci. Nullam dictum felis eu pede mollis pretium. Cras id dui.
+         If you have already got valid permits please click on manual permits to add permit details
         </v-col>
         <v-col class="shrink">
-          <v-btn>Take action</v-btn>
+          <v-btn>Manual Permits</v-btn>
         </v-col>
       </v-row>
     </v-alert>
