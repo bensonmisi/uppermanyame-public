@@ -2,7 +2,7 @@
 <div class="mt-20">
     <div class="d-flex justify-space-between">
      <div class="title">My Permits</div>
-      <v-btn rounded small depressed color="primary">New Permit</v-btn>
+ <v-btn rounded small depressed color="primary" to="/permits/new">New Permit</v-btn>
     </div>
     <v-card class="mt-5">      
         <v-card-text>

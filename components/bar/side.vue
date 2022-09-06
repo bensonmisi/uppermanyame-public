@@ -7,13 +7,14 @@
       permanent
     >
       <v-toolbar-title class="pa-2">
-        <img  src="logo.png" width="180px"/>
+        <img  src="/logo.png" width="180px"/>
       </v-toolbar-title>
       <v-list>
         <v-list-item
           v-for="item in items"
           :key="item.title"
           link
+          :to="item.url"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -40,13 +41,14 @@ export default {
  data(){
     return{
           items: [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard' ,url:"dashboard" },
-          { title: 'My Permits', icon: 'mdi-account-box' ,url:"permits"},
-          { title: 'My Bills', icon: 'mdi-account-box' ,url:"permits"},
-          { title: 'My Statement', icon: 'mdi-gavel' ,url:"banktransfers"},
-          { title: 'Online Payments', icon: 'mdi-gavel' ,url:"onlinepayments"},
-          { title: 'Bank Transfers', icon: 'mdi-gavel' ,url:"banktransfers"},
-          { title: 'Invoices', icon: 'mdi-gavel' ,url:"banktransfers"},
+          { title: 'Dashboard', icon: 'mdi-view-dashboard' ,url:"/dashboard" },
+          { title: 'My Permits', icon: 'mdi-account-box' ,url:"/permits"},
+          { title: 'My Properties', icon: 'mdi-bank' ,url:"/myproperty"},
+          { title: 'My Bills', icon: 'mdi-account-box' ,url:"/bills"},
+          { title: 'My Statement', icon: 'mdi-gavel' ,url:"/banktransfers"},
+          { title: 'Online Payments', icon: 'mdi-gavel' ,url:"/onlinepayments"},
+          { title: 'Bank Transfers', icon: 'mdi-gavel' ,url:"/banktransfers"},
+          { title: 'Invoices', icon: 'mdi-gavel' ,url:"/banktransfers"},
         ],
     }
  },methods:{
