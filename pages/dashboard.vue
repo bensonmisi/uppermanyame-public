@@ -4,7 +4,6 @@
     <Summary/>
     <Request/>
     <Permits/>
-    <Bills/>
  </v-container>
 </template>
 
@@ -13,7 +12,11 @@
 export default {
 
 auth:true,
-layout:"user"
+layout:"user",
+async mounted(){
+  await this.$store.dispatch('dashboard/getDashboard')
+}
+
 }
 </script>
 
