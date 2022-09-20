@@ -45,10 +45,9 @@ export default {
           { title: 'My Permits', icon: 'mdi-account-box' ,url:"/permits"},
           { title: 'My Properties', icon: 'mdi-bank' ,url:"/myproperty"},
           { title: 'My Bills', icon: 'mdi-account-box' ,url:"/bills"},
-          { title: 'My Statement', icon: 'mdi-gavel' ,url:"/banktransfers"},
-          { title: 'Online Payments', icon: 'mdi-gavel' ,url:"/onlinepayments"},
-          { title: 'Bank Transfers', icon: 'mdi-gavel' ,url:"/banktransfers"},
-          { title: 'Invoices', icon: 'mdi-gavel' ,url:"/banktransfers"},
+          { title: 'My Statement', icon: 'mdi-file-table' ,url:"/statement"},
+          { title: 'My Payments', icon: 'mdi-cash-check' ,url:"/payments"},
+          { title: 'Invoices', icon: 'mdi-receipt' ,url:"/invoices"},
         ],
     }
  },methods:{

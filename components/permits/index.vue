@@ -1,6 +1,6 @@
 <template>
 <div class="mt-20">
-    <v-card class="mt-5">  
+    <v-card class="mt-5" outlined>  
         <v-card-title>
             <div class="title">My Permits</div>
             <v-spacer/>

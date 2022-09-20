@@ -2,8 +2,8 @@
   <div>
     <v-row>
         <v-col md="3">
-            <v-card>
-                <v-card-text class="card-body">
+            <v-card outlined>
+                <v-card-text   class="card-body">
                  <div class="d-flex justify-space-between">                    
                     <div>
                         <div class="summary-figure">{{ totals ? totals.properties : `--`}}</div>
@@ -16,13 +16,13 @@
                         </div>
                 </div>  
                 <div class=" text-left mt-3">
-                    <v-btn outlined  small>View Details</v-btn>
+                    <v-btn outlined  small to="/myproperty">View Details</v-btn>
                 </div>
                 </v-card-text>
             </v-card>
         </v-col>
            <v-col md="3">
-              <v-card>
+              <v-card outlined>
                 <v-card-text class="card-body">
                  <div class="d-flex justify-space-between">
                    
@@ -38,13 +38,13 @@
                         </div>
                 </div>  
                 <div class=" text-left mt-3">
-                    <v-btn outlined  small>View Details</v-btn>
+                    <v-btn outlined  small to="/permits">View Details</v-btn>
                 </div>
                 </v-card-text>
             </v-card>
         </v-col>
            <v-col md="3">
-             <v-card>
+             <v-card outlined>
                 <v-card-text class="card-body">
                  <div class="d-flex justify-space-between">
                     
@@ -60,13 +60,13 @@
                         </div>
                 </div>  
                 <div class=" text-left mt-3">
-                    <v-btn outlined  small>View Details</v-btn>
+                    <v-btn outlined  small to="/bills">View Details</v-btn>
                 </div>
                 </v-card-text>
             </v-card>
         </v-col>
              <v-col md="3">
-             <v-card>
+             <v-card outlined>
                 <v-card-text class="card-body">
                  <div class="d-flex justify-space-between">
                     
@@ -82,7 +82,7 @@
                         </div>
                 </div>  
                 <div class=" text-left mt-3">
-                    <v-btn outlined  small>View Details</v-btn>
+                    <v-btn outlined  small to="/payments">View Details</v-btn>
                 </div>
                 </v-card-text>
             </v-card>

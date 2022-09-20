@@ -1,6 +1,6 @@
 <template>
   <div>
-      <v-btn color="primary" small depressed rounded  @click="getdata"><v-icon>mdi-plus</v-icon>Edit Property</v-btn>
+      <v-btn color="primary" small depressed rounded  @click="getdata"><v-icon>mdi-home-edit</v-icon>Edit Property</v-btn>
     <v-dialog v-model="addDialog" width="900px">
         <v-form v-model="valid" ref="form" lazy-validation>
         <v-card>

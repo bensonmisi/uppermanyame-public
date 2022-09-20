@@ -46,6 +46,7 @@
                             <td><small>{{permit.expiry_date}}</small></td>
                             <td><small>{{permit.permitnumber}}</small></td>
                             <td class="text-right">
+                              
                                 <v-btn v-if="permit.status=='ACTIVE'" rounded color="success" x-small depressed><v-icon small>mdi-download</v-icon> Download</v-btn>
                                 <v-btn v-else-if="permit.status=='EXPIRED'" rounded color="error" x-small depressed><v-icon small>mdi-sync</v-icon> Renew</v-btn>
                                  <v-btn v-else-if="permit.status=='PENDING'" rounded color="warning" x-small depressed to="/permits/new"><v-icon small>mdi-chevron-double-right</v-icon> Continue</v-btn>

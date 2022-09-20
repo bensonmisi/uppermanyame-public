@@ -37,7 +37,11 @@
                             <td>{{property.address}}</td>
                             <td>{{property.suburb.name}}</td>
                             <td>{{property.type}}</td>
-                            <td class="text-right"><PropertyEdit :property="property"/></td>
+                            <td class="d-flex justify-end pa-3">
+                              <v-btn  rounded color="info" small depressed :to="`/statement/`+property.id"><v-icon small>mdi-download</v-icon> Statement</v-btn>
+                             
+                              <PropertyEdit :property="property"/>
+                              </td>
                          </tr>
                         </template>
                         <template v-else>
