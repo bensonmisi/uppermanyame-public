@@ -2,14 +2,14 @@
   <div>
     <v-container fluid>
       <div class="d-flex justify-space-between">
-        <div class="text-h6">New Permit</div>
+        <div class="text-h6">My Properties</div>
         <div class="d-flex pt-3 pb-3">
           <div>
             <v-btn small text to="/dashboard">Dashboard</v-btn>
           </div>
           <div>/</div>
           <div>
-            <v-btn small disabled text>New Permit</v-btn>
+            <v-btn small disabled text>My Properties</v-btn>
           </div>
         </div>
       </div>
@@ -23,17 +23,21 @@
                 <template v-slot:default>
                     <thead>
                         <tr>
+                           <th>PP Number</th>
                             <th>Address</th>
                             <th>Area</th>
+                            <th>Type</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <template v-if="properties.length>0">
                          <tr v-for="property in properties" :key="property.id">
+                          <td>{{property.ppnumber}}</td>
                             <td>{{property.address}}</td>
                             <td>{{property.suburb.name}}</td>
-                            <td></td>
+                            <td>{{property.type}}</td>
+                            <td class="text-right"><PropertyEdit :property="property"/></td>
                          </tr>
                         </template>
                         <template v-else>

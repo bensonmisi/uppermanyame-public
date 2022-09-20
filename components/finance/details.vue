@@ -162,7 +162,7 @@
                                     <div class="title">Select Payment Method</div>             
                                         <FinanceEcocash :id="application.id"/>
                                         <FinanceOnemoney :id="application.id"/>
-                                        <FinanceBank :id="application.id"/>
+                                        <FinanceBank :currency="invoices[0].currency.name" :invoicenumber="invoices[0].invoicenumber"/>
                                 </template>
                                 <template v-else>
                                     <FinanceSettle :id="id"/>

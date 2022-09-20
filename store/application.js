@@ -1,6 +1,7 @@
 export const state =()=>({
     data:{},
-    application:{}
+    application:{},
+    applications:[]
 })
 
 export const mutations={
@@ -9,10 +10,24 @@ export const mutations={
     },
     setApplication(state,payload){
         state.application = payload
+    },
+    setApplications(state,payload){
+        state.applications = payload
     }
 }
 
 export const actions={
+    async getAll({commit}){
+        try {
+            await this.$axios.get('client-application').then((res)=>{
+                commit('setApplications',res.data)
+              })
+        } catch (error) {
+            const message = error.response ? error.response.data.message : error.message
+            this.$swal("error",message,"error")
+        }
+       
+    },
     async getPending({commit}){
         try {
             await this.$axios.get('client-application/pending').then((res)=>{

@@ -4,7 +4,7 @@
    <div class="mt-4">
    <v-btn depressed  large color="success" @click="vdialog=true" block>BANK TRANSFER</v-btn>
 
-   <v-dialog v-model="vdialog" width="400px">
+   <v-dialog v-model="vdialog" width="700px">
     <v-form ref="form" lazy-validation>
         <v-card>
         <v-card-title>ATTACH BANK TRANSFER</v-card-title>
@@ -12,57 +12,70 @@
             
             <v-row>
                 <v-col>
-                    <v-text-field outlined label="Mobile Number" v-model="form.phone" :rules="rule"/>
+                    <v-text-field outlined label="Your Bank Name" v-model="form.bank" :rules="rule"/>
+                </v-col>
+                <v-col>
+                    <v-text-field outlined label="Transfer Description" v-model="form.description" :rules="rule"/>
                 </v-col>
             </v-row>
-            <v-row>
+               <v-row>
+                <v-col>
+                    <v-text-field type="date" outlined label="Transfer Date" v-model="form.transactionDate" :rules="rule"/>
+                </v-col>
+                <v-col>
+                    <v-text-field  outlined label="Account number" v-model="form.accountnumber" :rules="rule"/>
+                </v-col>
+            </v-row>
+               <v-row>
+                <v-col>
+                   <label>Attached Proof Of Payment</label>
+                   <v-file-input
+                    v-model="file"
+                    :rules="rule"
+                ></v-file-input> 
+                </v-col>
                 <v-col>
                     <v-text-field outlined label="Enter Amount" v-model="form.amount"  type="number" :rules="rule"/>
                 </v-col>
             </v-row>
             <v-row>
-                <v-col>
-                    <v-btn block color="success" @click="submit">Submit</v-btn>
-                </v-col>
+              <v-col>
+                
+               
+           
+              </v-col>
             </v-row>
         </v-card-text>
+        <v-card-actions>
+          <v-btn rounded color="error" depressed @click="vdialog=false">Cancel</v-btn>
+          <v-spacer/>
+             <v-btn  rounded depressed color="success" @click="submit">Submit</v-btn>
+        </v-card-actions>
         
     </v-card>
     </v-form>
-   </v-dialog>
-   <v-dialog v-model="confirmDialog" width="400px">
-        <v-card>
-        <v-card-title>Confirm PAYMENT</v-card-title>
-        <v-card-text>
-              <v-alert
-      prominent
-      text
-      type="info"
-    >
-         Instruct client to check mobile and enter mobile water pin to authorize payment
-      
-    </v-alert>
-     <v-btn @click="checkpayment()" block :loading="loading">Check Payment</v-btn>
-        </v-card-text>
-        </v-card>
    </v-dialog>
      </div>
 </template>
 
 <script>
 export default {
-    props:['id'],
+    props:['invoicenumber','currency'],
  data(){
     return{
        vdialog:false,
        confirmDialog:false,
        loading:false,
        recordId:'',
+       file:null,
        form:{
-        mode:'ECOCASH',
-        phone:'',
+        bank:'',
+        invoicenumber:'',
+        description:'',
+        transactionDate:'',
+        accountnumber:'',
+        currency:'',
         amount:'',
-        applicationId:''
        },
        rule:[v=>!!v || 'Required']
     }
@@ -71,41 +84,32 @@ export default {
  async submit(){
    if (this.$refs.form.validate()) {
         this.valid = false;
-        let chargeamount = Number(this.form.amount) + Number(this.form.amount) * 0.025;
-        this.$swal({
-          title: "Service Charge",
-          text:
-            "Please note PAYNOW charges a service fee of 2.5%. Amount that will be charge to your phone will be ZWL" + chargeamount,
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes",
-        }).then(async (result) => {
-          if (result.isConfirmed) {
-            try {
-                this.form.applicationId = this.id
-              await this.$axios
-                .post("/administrator/receipting/payment/mobilepayment", this.form)
-                .then((res) => {
-                  if (res.data.status == "success") {
-                    this.recordId = res.data.data.id;
-                    this.confirmDialog = true;
-                    this.vdialog = false;
-                  }
-                });
-            } catch (error) {
-              this.$swal("error", error.response.data.message, "error");
-            }
-          }
-        });
+        this.loading = true
+             const formData = new FormData();
+            formData.append('bank',this.form.bank)
+            formData.append('invoicenumber',this.invoicenumber)
+            formData.append('description',this.form.description)
+            formData.append('transactionDate',this.form.transactionDate)
+            formData.append('accountnumber',this.form.accountnumber)
+            formData.append('currency',this.currency)
+            formData.append('amount',this.form.amount)
+            formData.append('file',this.file) 
+             let config = { headers: {'content-type': 'multipart/form-data'}}
+            await this.$axios({
+                method:"POST",
+                url:'client-banktransaction',
+                data:formData,
+                config:config
+            }).then(async (res)=>{
+            this.$swal('success',res.data.message,'success')
+            this.uploadDialog = false
+            this.loading=false
+          }).catch(error=>{
+             const message = error.response ? error.response.data.message : error.message
+             this.loading=false
+            this.$swal("error",message,"error")  
+          })
       }  
- },
- async checkpayment(){
-   this.loading=true
-   await this.$store.dispatch('receipting/checkpayment',this.recordId)
-   this.confirmDialog=false
-   this.loading=false
  }
  }
 }

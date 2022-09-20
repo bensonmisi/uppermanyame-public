@@ -4,74 +4,101 @@
         <v-col md="3">
             <v-card>
                 <v-card-text class="card-body">
-                 <div class="d-flex">
-                    <div><v-icon class="icon">mdi-bank</v-icon></div>
+                 <div class="d-flex justify-space-between">                    
                     <div>
+                        <div class="summary-figure">{{ totals ? totals.properties : `--`}}</div>
                         <div class="summary-title">Properties</div>
-                        <div class="summary-figure">3</div>
                     </div>
+                    <div>
+                        <v-btn fab depressed>
+                        <v-icon class="icon">mdi-bank</v-icon>
+                        </v-btn>
+                        </div>
                 </div>  
+                <div class=" text-left mt-3">
+                    <v-btn outlined  small>View Details</v-btn>
+                </div>
                 </v-card-text>
-                <v-card-actions>
-                    <v-btn text small>View Details</v-btn>
-                </v-card-actions>
             </v-card>
         </v-col>
            <v-col md="3">
               <v-card>
                 <v-card-text class="card-body">
-                 <div class="d-flex">
-                    <div><v-icon class="icon">mdi-clipboard-check-outline</v-icon></div>
+                 <div class="d-flex justify-space-between">
+                   
                     <div>
-                        <div class="summary-title">Permits</div>
-                        <div class="summary-figure">3</div>
+                          <div class="summary-figure">{{ totals ? totals.permits : `--`}}</div>
+                        <div class="summary-title">Permit Applications</div>
+                      
                     </div>
+                     <div>
+                        <v-btn fab depressed>
+                        <v-icon class="icon">mdi-clipboard-check-outline</v-icon>
+                        </v-btn>
+                        </div>
                 </div>  
+                <div class=" text-left mt-3">
+                    <v-btn outlined  small>View Details</v-btn>
+                </div>
                 </v-card-text>
-                <v-card-actions>
-                    <v-btn text small>View Details</v-btn>
-                </v-card-actions>
             </v-card>
         </v-col>
            <v-col md="3">
              <v-card>
                 <v-card-text class="card-body">
-                 <div class="d-flex">
-                    <div><v-icon class="icon-currency">mdi-currency-usd</v-icon></div>
+                 <div class="d-flex justify-space-between">
+                    
                     <div>
-                        <div class="summary-title">My Balance(USD)</div>
-                        <div class="summary-figure">3</div>
+                           <div class="summary-figure">{{ totals ? totals.bills.currency : `--`}}{{ totals ? totals.bills.amount : '--'}}</div>
+                        <div class="summary-title">OutStanding Bill</div>
+                     
                     </div>
+                    <div>
+                        <v-btn fab depressed>
+                        <v-icon class="icon-currency">mdi-currency-usd</v-icon>
+                        </v-btn>
+                        </div>
                 </div>  
+                <div class=" text-left mt-3">
+                    <v-btn outlined  small>View Details</v-btn>
+                </div>
                 </v-card-text>
-                <v-card-actions>
-                    <v-btn text small>View Details</v-btn>
-                </v-card-actions>
             </v-card>
         </v-col>
-           <v-col md="3">
+             <v-col md="3">
              <v-card>
                 <v-card-text class="card-body">
-                 <div class="d-flex">
-                    <div><v-icon class="icon-currency">mdi-currency-usd</v-icon></div>
+                 <div class="d-flex justify-space-between">
+                    
                     <div>
-                        <div class="summary-title">My Balance(ZWL)</div>
-                        <div class="summary-figure">3</div>
+                           <div class="summary-figure">{{ totals ? totals.bills.currency : `--`}}{{ totals ? totals.bills.amount : '--'}}</div>
+                        <div class="summary-title">My Wallet</div>
+                     
                     </div>
+                    <div>
+                        <v-btn fab depressed>
+                        <v-icon class="icon">mdi-currency-usd</v-icon>
+                        </v-btn>
+                        </div>
                 </div>  
+                <div class=" text-left mt-3">
+                    <v-btn outlined  small>View Details</v-btn>
+                </div>
                 </v-card-text>
-                <v-card-actions>
-                    <v-btn text small>View Details</v-btn>
-                </v-card-actions>
             </v-card>
         </v-col>
+         
     </v-row>
   </div>
 </template>
 
 <script>
 export default {
-
+   computed:{
+    totals(){
+        return this.$store.state.dashboard.data.totals
+    }
+   }
 }
 </script>
 
@@ -93,8 +120,10 @@ export default {
     padding: 20px;
  }
  .summary-title{
-    font-size: 18px;
-    color: rgb(143, 141, 141);
+    font-size: 14px;
+    margin-top: 10px;
+    --bs-text-opacity: 1;
+    color: #7a7b7cb1!important
  }
  .summary-figure{
     font-size: 24px;

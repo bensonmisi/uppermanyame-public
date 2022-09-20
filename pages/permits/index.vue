@@ -1,10 +1,26 @@
 <template>
-<div class="mt-20">
-    <v-card class="mt-5">  
+  <div>
+    <v-container fluid>
+      <div class="d-flex justify-space-between">
+        <div class="text-h6">Permit Applications</div>
+        <div class="d-flex pt-3 pb-3">
+          <div>
+            <v-btn small text to="/dashboard">Dashboard</v-btn>
+          </div>
+          <div>/</div>
+          <div>
+            <v-btn small disabled text>Permit Applications</v-btn>
+          </div>
+        </div>
+      </div>
+      <v-divider />
+      <div class="mt-3">
+        
+            <v-card class="mt-5">  
         <v-card-title>
-            <div class="title">My Permits</div>
+            <div class="title">Permit Applications</div>
             <v-spacer/>
- <v-btn rounded small depressed class="indigo white--text" to="/permits/new">New Permit</v-btn>
+ <v-btn rounded small depressed class="indigo white--text" to="/permits/new">New Application</v-btn>
             </v-card-title>    
         <v-card-text>
             <v-simple-table>
@@ -24,8 +40,8 @@
                         <template v-if="permits && permits.length>0">
                         <tr v-for="permit in permits" :key="permit.id">
                             <td><small>{{permit.id}}</small></td>
-                            <td><small>{{permit.address}}</small></td>
-                            <td><small>{{permit.type}}</small></td>
+                            <td><small>{{permit.property.address}}</small></td>
+                            <td><small>{{permit.permittype.name}}</small></td>
                             <td :class="permit.status=='ACTIVE' ? `green--text` : permit.status=='PENDING' ? `orange--text` :`red--text`"><small><b>{{permit.status}}</b></small></td>
                             <td><small>{{permit.expiry_date}}</small></td>
                             <td><small>{{permit.permitnumber}}</small></td>
@@ -47,22 +63,29 @@
             </v-simple-table>
         </v-card-text>
     </v-card>
-</div>
+      
+      </div>
+    </v-container>
+  </div>
 </template>
 
 <script>
 export default {
-   
- computed:{
-    permits(){
-        return this.$store.state.dashboard.data.permits
+  auth: true,
+  layout: "user",
+  async mounted() {
+    await this.$store.dispatch("application/getAll")
+  },
+  methods: {
+    async getData() {},
+  },
+  computed: {
+    permits() {
+      return this.$store.state.application.applications;
     }
- }
-}
+  },
+};
 </script>
 
 <style>
-.mt-20{
-    margin-top: 40px;
-}
 </style>
