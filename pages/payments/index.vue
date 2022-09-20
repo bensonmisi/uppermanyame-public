@@ -29,23 +29,22 @@
                         <tr>
                             <th>Date</th>
                             <th>Address</th>
-                            <th>Type</th>
-                            <th class="blue--text">Amount Due</th>
-                            <th class="green--text">Amount Paid</th>
-                            <th class="red--text">Balance</th>
-                            <th>Action</th>
+                            <th>Method</th>
+                            <th>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                      <template v-if="suspense && suspense.length>0">
+                        <tr v-for=" sus in suspense" :key="sus.id">
+                            <td>{{sus.date}}</td>
+                            <td>{{sus.address}}</td>
+                            <td>{{sus.method}}</td>
+                            <td>{{sus.currency}}{{sus.amount}}</td>
                         </tr>
+                      </template>
+                      <template v-else>
+                        <tr><td colspan="4" class="text-center red--text">No Records Found </td></tr>
+                      </template>
                     </tbody>
                 </template>
             </v-simple-table>
@@ -62,9 +61,11 @@ export default {
   auth: true,
   layout: "user",
   async mounted() {
+    await this.$store.dispatch('clientsuspense/getData')
   },
   computed: {
-    bills() {
+     suspense() {
+      return this.$store.state.clientsuspense.data
     }
   },
 };
