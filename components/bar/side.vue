@@ -46,6 +46,7 @@ export default {
           { title: 'My Properties', icon: 'mdi-bank' ,url:"/myproperty"},
           { title: 'My Bills', icon: 'mdi-account-box' ,url:"/bills"},
           { title: 'My Payments', icon: 'mdi-cash-check' ,url:"/payments"},
+          { title: 'My Statement', icon: 'mdi-cash-check' ,url:"/statement"},
           { title: 'Invoices', icon: 'mdi-receipt' ,url:"/invoices"},
         ],
     }

@@ -17,7 +17,6 @@ export const actions={
         } catch (error) {
             const message = error.response ? error.response.data.message : error.message
             this.$swal("error",message,"error")
-            this.$router.push({path:'/myproperty'})
 
         }
        
