@@ -10,22 +10,9 @@
                 <label>Select Borehole</label>
                 <v-select v-model="form.gwapplicationId" :items="boreholes" item-value="id" item-text="bhnumber"  outlined dense :rules="rule"/>
             </v-col>
-            <v-col>
-                <label>Intended Use</label>
-                <v-select v-model="form.purpose" :items="purpose" item-text="name" item-value="id" outlined dense :rules="rule"/>
-            </v-col>
             
          </v-row>
-          <v-row>
-            <v-col>
-                <label>Abstraction Rate</label>
-                              <v-text-field type="number"  v-model="form.abstractionrate" :readonly="loading" outlined dense :rules="rule" />
-            </v-col>
-              <v-col>
-                <label>UOM</label>
-                <v-select v-model="form.uom" :items="uom" item-value="id" item-text="name"  outlined dense :rules="rule"/>
-            </v-col>
-          </v-row>
+        {{application}}
          <v-row>
           <v-row v-if="form.purpose=='1'">
             <v-col>

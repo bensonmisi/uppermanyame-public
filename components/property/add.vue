@@ -27,16 +27,16 @@
          <v-card>
           <v-card-title>Address</v-card-title>
           <v-card-text>
-            <v-row>
+        <!--     <v-row>
               <v-col>
                  <v-text-field prepend-inner-icon="mdi-office-building-marker" type="text"  id="address" outlined  v-model="address" :rules="rule"/>
                  
               </v-col>
 
-            </v-row>
+            </v-row> -->
          <v-row>
             <v-col>
-                <label>Street Number</label>
+                <label>House Number</label>
                 <v-text-field v-model="form.streetnumber" outlined dense :rules="rule"/>
             </v-col>
             <v-col>
@@ -193,7 +193,7 @@ export default {
     }
  } ,methods:{
    async getdata(){
-  if (typeof google === 'undefined') {
+  /* if (typeof google === 'undefined') {
       const script = document.createElement('script')
       script.onload = this.onScriptLoaded
       script.type = 'text/javascript'
@@ -202,12 +202,12 @@ export default {
     } else {
       this.onScriptLoaded()
     
-    }
+    } */
       await this.$store.dispatch('surburb/getData')
      this.addDialog = true
      
    },
-   onScriptLoaded(event = null) {
+   /* onScriptLoaded(event = null) {
     var defaultBounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(-17.854437, 30.962787));
     var input = document.getElementById('address');
@@ -231,7 +231,7 @@ export default {
   })
   })
 
- },
+ }, */
  async addsuburb(){
      if(this.$refs.addsuburbform.validate())
        {
@@ -245,6 +245,7 @@ export default {
        {
           this.valid = true
            const formData = new FormData();
+           this.address = this.form.streetnumber+" "+this.form.streetname+" "+this.suburbname
           formData.append('streetnumber',this.form.streetnumber)
           formData.append('suburbId',this.form.area)
           formData.append('streetname',this.form.streetname)

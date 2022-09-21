@@ -23,32 +23,41 @@
  
             </v-card-title>    
         <v-card-text>
-              <v-simple-table>
-                <template v-slot:default>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Address</th>
-                            <th>Type</th>
-                            <th class="blue--text">Amount Due</th>
-                            <th class="green--text">Amount Paid</th>
-                            <th class="red--text">Balance</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </template>
-            </v-simple-table>
+                 <v-simple-table>
+          <template v-slot:default>
+            <thead dark>
+              <tr class="text--white" dark>
+                <th>Date</th>
+                <th>Address</th>
+                <th>Invoice Number</th>
+                <th>Permit Type</th>
+                <th>Exchange Rate</th>
+                <th class="text-center">Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template v-if="invoices.length>0">
+               <tr v-for="inv in invoices" :key="inv.id">
+                <td><small>{{inv.date | simpleDateformate}}</small></td>
+                <td><small>{{inv.address}}</small></td>
+                <td><small>{{inv.invoicenumber}}</small></td>
+                <td><small>{{inv.permittype}}</small></td>
+                <td><small>{{`1:`+inv.exchangerate}}</small></td>
+                <td class="text-center"><small>{{inv.currency}}{{inv.amount}}</small></td>
+                <td><small>{{inv.status}}</small></td>
+               
+               </tr>
+            
+              </template>
+              <template v-else>
+                <tr>
+                  <td colspan="6" class="text-center red--text">No Invoice Items Found</td>
+                </tr>
+              </template>
+            </tbody>
+          </template>
+         </v-simple-table>
         </v-card-text>
     </v-card>
       
@@ -62,9 +71,12 @@ export default {
   auth: true,
   layout: "user",
   async mounted() {
+
+    await this.$store.dispatch('invoice/getAll')
   },
   computed: {
-    bills() {
+    invoices() {
+      return this.$store.state.invoice.data
     }
   },
 };

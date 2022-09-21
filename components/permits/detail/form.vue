@@ -34,23 +34,24 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col>
-                    <v-select
-                    v-model="form.purposeId"
-                    outlined
-                    label="Permit Purpose"
-                    :items="settings.purposelist"
-                    item-text="name"
-                    item-value="id"
-                    :rules="rule"
-                  />
-                </v-col>
+              
                 <v-col>
                     <v-select
                     v-model="form.categoryId"
                     outlined
                     label="Permit Category"
                     :items="settings.categorylist"
+                    item-text="name"
+                    item-value="id"
+                    :rules="rule"
+                  />
+                </v-col>
+                  <v-col>
+                    <v-select
+                    v-model="form.purposeId"
+                    outlined
+                    label="Permit Purpose"
+                    :items="purposelist"
                     item-text="name"
                     item-value="id"
                     :rules="rule"
@@ -100,7 +101,21 @@ data() {
            this.loading=false
        }
     }
+  },
+  computed:{
+    purposelist(){
+    let array = []
+    if(this.form.categoryId)
+     {
+      const data = this.settings.categorylist.filter((dt)=>dt.id==this.form.categoryId)
+      if(data.length>0){
+        array = data[0].purpose
+      }
+     }
+     return array
+     }
   }
+
 }
 </script>
 
